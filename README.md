@@ -4,10 +4,10 @@
 [![Platform](https://img.shields.io/cocoapods/p/BaiduMapOnlyPOI.svg?style=flat)](http://cocoadocs.org/docsets/BaiduMapOnlyPOI)
 
 ## Quick start
+`BaiduMapOnlyPOI` 允许用户通过CoreLocation获取坐标，然后使用Baidu地图获取反向信息
 
-`BaiduMapOnlyPOI` 支持 [CocoaPods](http://cocoapods.org).  添加下面的配置到 `Podfile`:
 `BaiduMapOnlyPOI` 支持 Swift
-`BaiduMapOnlyPOI` 支持 虚拟机 & 真机，真实使用请替换成真机framework
+`BaiduMapOnlyPOI` 支持 虚拟机 & 真机，提交审核时使用请替换成真机framework
 
 `AppDelegate.swift`添加：
 ```swift
@@ -77,6 +77,7 @@ class City: NSObject,CLLocationManagerDelegate,BMKGeoCodeSearchDelegate{
 ```
 
 
+`BaiduMapOnlyPOI` 支持 [CocoaPods](http://cocoapods.org).  添加下面的配置到 `Podfile`:
 
 ```ruby
 pod 'BaiduMapOnlyPOI', :git => 'https://github.com/llb0536/BaiduMapOnlyPOI', :tag => '2.7.0
