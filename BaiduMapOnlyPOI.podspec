@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary  = 'Baidu Map API For iOS.'
   s.homepage = 'http://developer.baidu.com/map/index.php?title=iossdk'
   s.authors  = { 'Libo' => 'llb0536@gmail.com' }
-  s.source   = { :git => 'https://github.com/llb0536/BaiduMapAPI.git', :tag => s.version }
+  s.source   = { :git => 'git@github.com:llb0536/BaiduMapOnlyPOI.git', :tag => s.version }
   s.ios.deployment_target = '7.0'
   s.requires_arc   = true
 
