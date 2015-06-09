@@ -1,17 +1,91 @@
 # BaiduMapOnlyPOI
-[![Version](https://img.shields.io/cocoapods/v/BaiduMapAPI.svg?style=flat)](http://cocoadocs.org/docsets/BaiduMapAPI)
-[![License](https://img.shields.io/cocoapods/l/BaiduMapAPI.svg?style=flat)](http://cocoadocs.org/docsets/BaiduMapAPI)
-[![Platform](https://img.shields.io/cocoapods/p/BaiduMapAPI.svg?style=flat)](http://cocoadocs.org/docsets/BaiduMapAPI)
+[![Version](https://img.shields.io/cocoapods/v/BaiduMapOnlyPOI.svg?style=flat)](http://cocoadocs.org/docsets/BaiduMapOnlyPOI)
+[![License](https://img.shields.io/cocoapods/l/BaiduMapOnlyPOI.svg?style=flat)](http://cocoadocs.org/docsets/BaiduMapOnlyPOI)
+[![Platform](https://img.shields.io/cocoapods/p/BaiduMapOnlyPOI.svg?style=flat)](http://cocoadocs.org/docsets/BaiduMapOnlyPOI)
 
 ## Quick start
 
-`BaiduMapAPI` 支持 [CocoaPods](http://cocoapods.org).  添加下面的配置到 `Podfile`:
+`BaiduMapOnlyPOI` 支持 [CocoaPods](http://cocoapods.org).  添加下面的配置到 `Podfile`:
+`BaiduMapOnlyPOI` 支持 Swift
+`BaiduMapOnlyPOI` 支持 虚拟机 & 真机，真实使用请替换成真机framework
 
-```ruby
-pod 'BaiduMapOnlyPOI', '~> 2.7.0'
+`AppDelegate.swift`添加：
+```swift
+    let baiduManager:BMKMapManager = BMKMapManager()
+    var ret:Bool = baiduManager.start("your_key", generalDelegate: nil)
+    if (!ret) {
+        println("manager start failed!")
+    }else{
+        println("manager start succ!")
+    }    
+```
+`your_class.swift`添加
+```
+class City: NSObject,CLLocationManagerDelegate,BMKGeoCodeSearchDelegate{
+    let locationManager:CLLocationManager = CLLocationManager()
+    let searcher:BMKGeoCodeSearch = BMKGeoCodeSearch()
+    override init(){
+
+        super.init()
+        locationManager.delegate = self
+        searcher.delegate = self
+
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = kCLLocationAccuracyThreeKilometers
+        if is_ios8() {
+            locationManager.requestAlwaysAuthorization()
+        }
+        locationManager.startUpdatingLocation()
+    }
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!){
+        self.locationManager.stopUpdatingLocation();
+        var location:CLLocation = locations.last as! CLLocation
+
+        if location.horizontalAccuracy > 0 {
+            var pt:CLLocationCoordinate2D = location.coordinate
+            var reverseGeoCodeSearchOption:BMKReverseGeoCodeOption = BMKReverseGeoCodeOption.alloc()
+            reverseGeoCodeSearchOption.reverseGeoPoint = pt
+            var flag:Bool = searcher.reverseGeoCode(reverseGeoCodeSearchOption)
+
+            if(flag)
+            {
+              println("反geo检索发送成功");
+            }
+            else
+            {
+              println("反geo检索发送失败");
+            }
+    }
+
+}
+
 ```
 
-### fork from qzs21/BaiduMapAPI
+回调：
+```
+    func onGetReverseGeoCodeResult(searcher:BMKGeoCodeSearch,#result:BMKReverseGeoCodeResult,errorCode error:BMKSearchErrorCode){
+        if error.value == 0 {
+            let addr = result.addressDetail
+            self.city_name = addr.city
+            self.district = addr.district
+            self.province = addr.province
+            self.level2 = addr.city
+          }else {
+            println("抱歉，未找到结果")
+          }
+    }
+```
+
+
+
+```ruby
+pod 'BaiduMapOnlyPOI', :git => 'https://github.com/llb0536/BaiduMapOnlyPOI', :tag => '2.7.0
+```
+
+### 感谢
+Thank qzs21. Original project forked from [qzs21/BaiduMapAPI](https://github.com/qzs21/BaiduMapAPI)
+
+
 ### 百度地图 iOS API 包含如下功能：
 -------------------
 * 基础地图：包括基本矢量地图、卫星图、实时路况图和各种地图覆盖物，此外还包括各种与地图相关的操作和事件监听；
