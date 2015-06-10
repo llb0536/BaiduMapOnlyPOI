@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name     = 'BaiduMapOnlyPOI'
-  s.version  = '2.7.0'
+  s.version  = '2.7.1'
   s.license  = { :type => 'Copyright', :text => 'LICENSE  ©2013 Baidu, Inc. All rights reserved.' }
   s.summary  = 'Baidu Map API For iOS.'
   s.homepage = 'http://developer.baidu.com/map/index.php?title=iossdk'
