@@ -12,8 +12,11 @@ pod 'BaiduMapOnlyPOI', '~> 2.7.1'
 ```
 ### 本项目的百度地图类库 iOS API 包含如下功能：
 检索功能：包括POI检索，Place详情检索，公交信息查询，路线规划，地理编码/反地理编码，在线建议查询，短串分享等；
+
 `BaiduMapOnlyPOI` 允许用户通过CoreLocation获取坐标，然后使用Baidu地图获取反向信息
+
 `BaiduMapOnlyPOI` 支持 Swift
+
 `BaiduMapOnlyPOI` 支持 虚拟机 & 真机，提交审核时使用请替换成真机framework
 
 `AppDelegate.swift`添加：
